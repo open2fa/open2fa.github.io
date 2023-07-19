@@ -1,0 +1,26 @@
+{
+  "name": "open2fa.github.io",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "",
+  "scripts": {
+    "prestart": "node ./_generate_app_html.js",
+    "start": "node ./_server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/open2fa/open2fa.github.io.git"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Gianluca Casati",
+    "url": "https://fibo.github.io"
+  },
+  "license": "GPL-3",
+  "bugs": {
+    "url": "https://github.com/open2fa/open2fa.github.io/issues"
+  },
+  "homepage": "https://open2fa.github.io"
+}
