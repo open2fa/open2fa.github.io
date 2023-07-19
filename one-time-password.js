@@ -1,4 +1,4 @@
-import { BaseElement } from "./_base-element.js";
+import { BaseElement } from "./base-element.js";
 import { isSecret } from "./database.js";
 import { get2FA } from "./get2FA.js";
 

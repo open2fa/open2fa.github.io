@@ -1,4 +1,4 @@
-import { BaseElement } from "./_base-element.js";
+import { BaseElement } from "./base-element.js";
 import { database } from "./database.js";
 
 export class AccountsList extends BaseElement {

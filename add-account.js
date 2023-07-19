@@ -1,4 +1,4 @@
-import { BaseElement } from "./_base-element.js";
+import { BaseElement } from "./base-element.js";
 import { database, ErrorInvalidAccount } from "./database.js";
 
 export class AddAccount extends BaseElement {
