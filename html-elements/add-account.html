@@ -1,0 +1,36 @@
+<template id="add-account">
+  <link rel="stylesheet" href="common.css" />
+
+  <style>
+    :host {
+      box-sizing: border-box;
+    }
+
+    input#secret {
+      width: calc(32em + 2 * var(--input-inline-padding));
+    }
+  </style>
+
+  <dialog>
+    <form method="dialog">
+      <one-time-password></one-time-password>
+
+      <div class="field">
+        <label for="name">Name</label>
+        <input id="name" type="text" />
+      </div>
+
+      <div class="field">
+        <label for="secret">Secret</label>
+        <input id="secret" type="text" />
+      </div>
+
+      <menu>
+        <button value="cancel" formmethod="dialog">Cancel</button>
+        <button value="confirm">Confirm</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <button>Add</button>
+</template>

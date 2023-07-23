@@ -1,15 +1,15 @@
 :root {
-	--font-size: 17px;
+  --font-size: 17px;
 
-	--border-radius: 4px;
-	--border-width: 1px;
-	--border-color: gainsboro;
-	--outline-color: black;
+  --border-radius: 4px;
+  --border-width: 1px;
+  --border-color: gainsboro;
+  --outline-color: black;
 
-	--input-inline-padding: 1em;
-	--input-block-padding: 0.6em;
+  --input-inline-padding: 1em;
+  --input-block-padding: 0.6em;
 }
 
 html {
-	font-size: var(--font-size);
+  font-size: var(--font-size);
 }

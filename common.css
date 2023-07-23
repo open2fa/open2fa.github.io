@@ -1,43 +1,43 @@
 *,
 *:before,
 *:after {
-	box-sizing: inherit;
+  box-sizing: inherit;
 }
 
 .field {
-	display: flex;
-	flex-direction: column;
-	margin-bottom: 1em;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1em;
 }
 
 output {
-	border: 1px solid transparent;
-	height: 1em;
+  border: 1px solid transparent;
+  height: 1em;
 }
 
 button {
-	display: inline-flex;
-	padding: 1em 1.618em;
-	text-transform: uppercase;
-	border-width: var(--border-width);
-	border-style: solid;
-	border-color: var(--border-color);
-	border-radius: var(--border-radius);
-	outline-color: var(--outline-color);
-	user-select: none;
-	cursor: pointer;
+  display: inline-flex;
+  padding: 1em 1.618em;
+  text-transform: uppercase;
+  border-width: var(--border-width);
+  border-style: solid;
+  border-color: var(--border-color);
+  border-radius: var(--border-radius);
+  outline-color: var(--outline-color);
+  user-select: none;
+  cursor: pointer;
 }
 
 input {
-	border-width: var(--border-width);
-	border-style: solid;
-	border-color: var(--border-color);
-	border-radius: var(--border-radius);
-	padding-block: var(--input-block-padding);
-	padding-inline: var(--input-inline-padding);
-	outline-color: var(--outline-color);
+  border-width: var(--border-width);
+  border-style: solid;
+  border-color: var(--border-color);
+  border-radius: var(--border-radius);
+  padding-block: var(--input-block-padding);
+  padding-inline: var(--input-inline-padding);
+  outline-color: var(--outline-color);
 }
 
 dialog {
-	max-inline-size: 90vw;
+  max-inline-size: 90vw;
 }

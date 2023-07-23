@@ -1,16 +1,18 @@
-import { readFile, writeFile } from "node:fs/promises";
+import { readdir, readFile, writeFile } from "node:fs/promises";
+import { basename, extname, join } from "node:path";
 
-const elements = ["accounts-list", "add-account", "one-time-password"];
-
-const appLayout = await readFile("app-layout.html", "utf-8");
+const htmlElementsDirFiles = await readdir("html-elements");
+const elements = htmlElementsDirFiles
+  .filter((filename) => extname(filename) === ".js")
+  .map((filename) => basename(filename, ".js"));
 
 const clearAndUpper = (text) => text.replace(/-/, "").toUpperCase();
 const toPascalCase = (text) => text.replace(/(^\w|-\w)/g, clearAndUpper);
 
 const templates = await Promise.all(
   elements.map((template) =>
-    readFile(`${template}.html`, "utf-8").then((content) =>
-      content.replaceAll("\n", "").replaceAll("\t", "")
+    readFile(join("html-elements", `${template}.html`), "utf-8").then(
+      (content) => content.replaceAll("\n", "").replaceAll("\t", "")
     )
   )
 );
@@ -25,8 +27,6 @@ const content = `<!DOCTYPE html>
   <link rel="stylesheet" href="root.css">
 </head>
 <body>
-  <!-- App layout. -->
-  ${appLayout.split("\n").join("\n  ")}
   <!-- CustomElement templates. -->
   ${templates.join("\n  ")}
 
@@ -35,7 +35,9 @@ const content = `<!DOCTYPE html>
     ${elements
       .map(
         (element) =>
-          `import { ${toPascalCase(element)} } from "./${element}.js";`
+          `import { ${toPascalCase(
+            element
+          )} } from "./html-elements/${element}.js";`
       )
       .join("\n    ")}
 
@@ -46,6 +48,8 @@ const content = `<!DOCTYPE html>
       )
       .join("\n    ")}
   </script>
+
+  <app-layout></app-layout>
 </body>
 </html>
 `;
