@@ -24,7 +24,7 @@ class Database {
     }
     const parsedDatabaseJson = JSON.parse(databaseJson);
     this.whenUpdated = parsedDatabaseJson.whenUpdated;
-    for (const [key, value] of parsedDatabaseJson.accounts) {
+    for (const [key, value] of Object.entries(parsedDatabaseJson.accounts)) {
       this.accountMap.set(key, value);
     }
   }
@@ -40,27 +40,40 @@ class Database {
     return this.accountMap.size;
   }
 
-  addAccount(account) {
-    if (!isAccount(account)) throw new ErrorInvalidAccount();
-    this.accountMap.set(this.newId, account);
+  get accountIds() {
+    return this.accountMap.keys();
+  }
+
+  addAccount(newAccount) {
+    if (!isAccount(newAccount)) throw new ErrorInvalidAccount();
+    for (const account of this.accountMap.values())
+      if (account.secret === newAccount.secret)
+        throw new ErrorAccountSecretAlreadyExists();
+    this.accountMap.set(this.newId, newAccount);
     this.whenUpdated = Date.now();
     this.writeToLocalStorage();
-    return new CustomEvent("addAccount", {
-      detail: account,
-    });
   }
 
   writeToLocalStorage() {
-    localStorage.setItem("database", {
-      whenUpdated: this.whenUpdated,
-      accounts: Object.fromEntries(this.accountMap.entries()),
-    });
+    localStorage.setItem(
+      "database",
+      JSON.stringify({
+        whenUpdated: this.whenUpdated,
+        accounts: Object.fromEntries(this.accountMap.entries()),
+      })
+    );
   }
 }
 
 export class ErrorInvalidAccount extends Error {
   constructor() {
     super("Invalid account");
+  }
+}
+
+export class ErrorAccountSecretAlreadyExists extends Error {
+  constructor() {
+    super("Account secret already exists");
   }
 }
 
