@@ -12,7 +12,10 @@ const toPascalCase = (text) => text.replace(/(^\w|-\w)/g, clearAndUpper)
 const templates = await Promise.all(
   elements.map((template) =>
     readFile(join("html-elements", `${template}.html`), "utf-8").then((content) =>
-      content.replaceAll("\n", "").replaceAll("\t", "")
+      content
+        .split("\n")
+        .map((row) => row.trimStart())
+        .join("")
     )
   )
 )
