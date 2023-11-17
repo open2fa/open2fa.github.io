@@ -26,6 +26,7 @@ export class OneTimePassword extends BaseElement {
     clearInterval(this.intervalId);
   }
 
+  /** @param {string} secret */
   set secret(secret) {
     clearTimeout(this.timeoutId);
     clearInterval(this.intervalId);

@@ -13,8 +13,13 @@ const STATIC_PATH = path.resolve(process.cwd());
 
 http
   .createServer(async (req, res) => {
+    console.info(req.method, req.url);
     const pathParts = [STATIC_PATH, req.url];
     if (req.url.endsWith("/")) pathParts.push("index.html");
+    if (req.url.endsWith("/app")) {
+      pathParts.pop();
+      pathParts.push("app.html");
+    };
     const filePath = path.join(...pathParts);
 
     const exists = await fs.promises.access(filePath).then(
@@ -40,4 +45,4 @@ http
   })
   .listen(PORT);
 
-console.log(`Point your browser to http://localhost:${PORT}`);
+console.info(`Point your browser to http://localhost:${PORT}`);

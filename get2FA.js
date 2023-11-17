@@ -2,7 +2,7 @@
 // Open2FA project came to life thanks to this function that Mathias Lasser
 // kindly shared with me during a nighlty coding session.
 // It was my first meet up at Ready2Order in Vienna, during May 2023.
-const get2FA = (
+export const get2FA = (
   s,
   d = 6,
   t = Date.now() / 30000,

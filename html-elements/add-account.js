@@ -86,6 +86,7 @@ export class AddAccount extends BaseElement {
 
     if (event.type === "reset") {
       event.preventDefault();
+      this.cleanup();
       this.$dialog.close();
     }
   }

@@ -1,6 +1,6 @@
 export const isSecret = (arg) => {
   if (typeof arg !== "string") return false;
-  if (arg.length !== 32) return false;
+  if (arg === "") return false
   for (let i = 0; i < arg.length; i++)
     if (!"ABCDEFGHIJKLMNOPQRSTUVWXYZ234567".includes(arg[i])) return false;
   return true;
@@ -30,10 +30,7 @@ class Database {
   }
 
   get newId() {
-    return Math.random()
-      .toString(36)
-      .replace(/[^a-z]+/g, "")
-      .substring(0, 5);
+    return window.crypto.randomUUID().substring(0, 6);
   }
 
   get numAccounts() {

@@ -29,6 +29,7 @@ button {
 }
 
 input {
+  max-width: 100%;
   border-width: var(--border-width);
   border-style: solid;
   border-color: var(--border-color);
