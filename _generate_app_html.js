@@ -1,24 +1,25 @@
-import { readdir, readFile, writeFile } from "node:fs/promises"
-import { basename, extname, join } from "node:path"
+import { readdir, readFile, writeFile } from "node:fs/promises";
+import { basename, extname, join } from "node:path";
 
-const htmlElementsDirFiles = await readdir("html-elements")
+const htmlElementsDirFiles = await readdir("html-elements");
 const elements = htmlElementsDirFiles
   .filter((filename) => extname(filename) === ".js")
-  .map((filename) => basename(filename, ".js"))
+  .map((filename) => basename(filename, ".js"));
 
-const clearAndUpper = (text) => text.replace(/-/, "").toUpperCase()
-const toPascalCase = (text) => text.replace(/(^\w|-\w)/g, clearAndUpper)
+const clearAndUpper = (text) => text.replace(/-/, "").toUpperCase();
+const toPascalCase = (text) => text.replace(/(^\w|-\w)/g, clearAndUpper);
 
 const templates = await Promise.all(
   elements.map((template) =>
-    readFile(join("html-elements", `${template}.html`), "utf-8").then((content) =>
-      content
-        .split("\n")
-        .map((row) => row.trimStart())
-        .join("")
-    )
-  )
-)
+    readFile(join("html-elements", `${template}.html`), "utf-8").then(
+      (content) =>
+        content
+          .split("\n")
+          .map((row) => row.trimStart())
+          .join(""),
+    ),
+  ),
+);
 
 const content = `<!DOCTYPE html>
 <html lang="en">
@@ -36,15 +37,25 @@ const content = `<!DOCTYPE html>
   <!-- CustomElements definitions. -->
   <script type="module">
     ${elements
-      .map((element) => `import { ${toPascalCase(element)} } from "./html-elements/${element}.js";`)
+      .map(
+        (element) =>
+          `import { ${toPascalCase(
+            element,
+          )} } from "./html-elements/${element}.js";`,
+      )
       .join("\n    ")}
 
-    ${elements.map((element) => `customElements.define("${element}", ${toPascalCase(element)});`).join("\n    ")}
+    ${elements
+      .map(
+        (element) =>
+          `customElements.define("${element}", ${toPascalCase(element)});`,
+      )
+      .join("\n    ")}
   </script>
 
   <app-layout></app-layout>
 </body>
 </html>
-`
+`;
 
-await writeFile("app.html", content, "utf-8")
+await writeFile("app.html", content, "utf-8");

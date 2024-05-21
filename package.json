@@ -23,10 +23,5 @@
   "bugs": {
     "url": "https://github.com/open2fa/open2fa.github.io/issues"
   },
-  "homepage": "https://open2fa.github.io",
-  "prettier": {
-    "printWidth": 120,
-    "semi": false,
-    "trailingComma": "none"
-  }
+  "homepage": "https://open2fa.github.io"
 }
